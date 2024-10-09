@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 
 const db = new pg.Client({
   user: "postgres",
-  host: "localhost",
+  host: "192.168.1.9",
   database: "estoque",
   password: "1234",
   port: 5432,

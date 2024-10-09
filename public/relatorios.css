@@ -15,6 +15,7 @@ h2, h3 {
 }
 
 .container {
+    padding-top: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
