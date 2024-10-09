@@ -55,11 +55,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/cadastro", (req, res) => {
-    res.render("cadastro", {title: "Cadastre-se"})
+    res.render("cadastro", {title: "Cadastre-se", style: '/cadastro.css'})
 });
 
 app.get("/login", (req, res) => {
-    res.render("login", {title: "Log in"})
+    res.render("login", {title: "Log in", style: '/login.css'})
 });
 
 app.get("/home", (req, res) => {
@@ -91,18 +91,26 @@ app.get("/cadastro-produto", (req, res) => {
 });
 
 app.get("/editar-produto/:id", async (req, res) => {
-    const productId = req.params.id;
+    const productId = parseInt(req.params.id); // Convertendo o productId para inteiro
     const userId = req.user.id;
+
+    if (isNaN(productId)) {
+        return res.status(400).send("ID de produto inválido");
+    }
 
     try {
         const result = await db.query("SELECT * FROM products WHERE id = $1 AND user_id = $2", [productId, userId]);
         const product = result.rows[0];
-        res.render("editar-produto", {title: "Edição de Produto", product});
+        if (!product) {
+            return res.status(404).send("Produto não encontrado");
+        }
+        res.render("editar-produto", {title: "Edição de Produto", product, style: 'editar-produto.css'});
     } catch (err) {
         console.error(err);
         res.status(500).send("Erro ao carregar produtos para edição");
     }
 });
+
 
 app.get("/saida-peca", (req, res) => {
     
@@ -135,7 +143,8 @@ app.get("/relatorios", async (req, res) => {
         title: "Relatórios",
         entries: [],
         exits: [],
-        outOfStock: []
+        outOfStock: [],
+        style: 'relatorios.css'
     });
 });
 
@@ -305,7 +314,8 @@ app.post("/relatorios", async (req, res) => {
             title: "Relatórios",
             entries: entries.rows,
             exits: exits.rows,
-            outOfStock: outOfStock.rows
+            outOfStock: outOfStock.rows,
+            style: 'relatorios.css'
         });
     } catch (err) {
         console.error(err);
