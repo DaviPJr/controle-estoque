@@ -1,0 +1,66 @@
+
+<h2>Saída de produtos:</h2>
+
+<form action="/saida-peca" method="POST">
+    <div class="form-group">
+        <label for="productCode">Código do Produto:</label>
+        <input type="text" id="productCode" name="productCode" required oninput="buscarProduto()" class="form-control">
+
+        <label for="productName">Nome do Produto:</label>
+        <input type="text" id="productName" name="productName" required readonly class="form-control">
+
+        <label for="quantity">Quantidade:</label>
+        <input type="number" id="quantity" name="quantity" required min="1" class="form-control">
+
+        <label for="clientName">Nome do Cliente:</label>
+        <input type="text" id="clientName" name="clientName" required class="form-control">
+
+        <label for="saleValue">Valor da Venda:</label>
+        <input type="number" id="saleValue" name="saleValue" required step="0.01" min="0" class="form-control">
+
+        <button type="submit" class="btn">Registrar Saída</button>
+        <a href="/home" class="btn voltar">Voltar</a>
+    </div>
+</form>
+
+
+<script>
+    const errorMessage = "<%= errorMessage %>";
+    const successMessage = "<%= successMessage %>";
+
+    if (errorMessage) {
+        alert(errorMessage);
+    }
+
+    if (successMessage) {
+        alert(successMessage);
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    async function buscarProduto() {
+        const productCode = document.getElementById('productCode').value;
+
+        if (productCode) {
+            try {
+                const response = await axios.get(`/buscar-produto`, {
+                    params: { code: productCode }
+                });
+
+                const data = response.data;
+
+                if (data.product) {
+                    document.getElementById("productName").value = data.product.nome;
+                } else {
+                    document.getElementById("productName").value = "";
+                }
+            } catch (error) {
+                console.error("Erro ao buscar o produto", error);
+            }
+        } else {
+            document.getElementById('productName').value = '';
+        }
+    }
+</script>

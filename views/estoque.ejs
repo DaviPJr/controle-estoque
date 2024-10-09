@@ -1,0 +1,46 @@
+<h2>Produtos em estoque:</h2>
+<div class="estoque">
+    
+    <% if (products.length > 0) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Quantidade</th>
+                    <th>Preço</th>
+                    <th>Código</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% products.forEach(product => { %>
+                    <tr style = "<%= product.quantidade === 0 ? 'background-color: #ffe6e6; color: red;' : '' %>">
+                        <td><%= product.nome %></td>
+                        <td>
+                            <% if (product.quantidade === 0) { %>
+                                <span style="font-weight: bold; color: red;">Fora de estoque</span>
+                            <% } else { %>
+                                <%= product.quantidade %>
+                            <% } %>
+                        </td>
+                        <td>R$ <%= product.preco %></td>
+                        <td><%= product.ncmsh %></td>
+                        <td>
+                            <a href="/editar-produto/<%= product.id %>" class="button-link">Editar</a>
+                            <form action="/excluir-produto/<%= product.id %>" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este produto?');" style="display: inline;">
+                                <button type="submit">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>Nenhum produto cadastrado no estoque.</p>
+    <% } %>
+</div>
+
+<div class="links-retorno">
+    <a href="/cadastro-produto">Cadastrar novo produto</a>
+    <a href="/home">Voltar</a>
+</div>
