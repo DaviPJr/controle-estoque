@@ -23,7 +23,7 @@ app.set('view engine', 'ejs');
 app.set('layout', 'layout');
 
 app.use(session({
-    secret: "TOPSECRETWORD",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
