@@ -93,7 +93,7 @@ app.get("/cadastro-produto", (req, res) => {
 });
 
 app.get("/editar-produto/:id", async (req, res) => {
-    const productId = parseInt(req.params.id); // Convertendo o productId para inteiro
+    const productId = parseInt(req.params.id); 
     const userId = req.user.id;
 
     if (isNaN(productId)) {
@@ -197,6 +197,22 @@ app.post(
       failureRedirect: "/login",
     })
 );
+
+app.post("/logout", (req, res) => { 
+    req.logout((err) => {
+        if (err) {
+            console.error(err);
+            return res.redirect("/home"); 
+        }
+        req.session.destroy((err) => {
+            if (err) {
+                console.error(err);
+                return res.redirect("/home"); 
+            }
+            res.redirect("/login"); 
+        });
+    });
+})
 
 app.post("/cadastro-produto", async (req, res) => {
     const { nome, quantidade, preco, codigo } = req.body;

@@ -28,6 +28,7 @@ section {
     justify-content: center;
     align-items: center;
     transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
 }
 
 .telas > div:hover {
@@ -61,20 +62,36 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-
+    margin-top: 90px;
 }
 
-.deslogar > div {
+.deslogar > form {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     gap: 10px;
-    width: 500px;
-    height: 200px;
 }
 
-.deslogar > div > a {
-    text-decoration: underline;
+.deslogar > form > button {
     color: #3498db; 
-    font-weight: bold;
+    background-color: #f04a5a; 
+    color: #fff; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.deslogar button:hover {
+    background-color: #e03e4e; 
+    transform: scale(1.05);
+}
+
+.deslogar button:active {
+    background-color: #d33946; 
+    transform: scale(0.98);
 }
