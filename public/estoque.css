@@ -1,0 +1,104 @@
+.estoque {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h2 {
+    text-align: center;
+    font-size: 30px;
+}
+
+table {
+    width: 100%; 
+}
+
+th, td {
+    padding: 10px;
+    text-align: left; 
+}
+
+th {
+    background-color: #f2f2f2; 
+}
+
+td a {
+    text-decoration: none; 
+}
+
+.button-link {
+    background-color: #007bff ;
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px; 
+    margin: 4px 2px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+.button-link:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); 
+}
+
+button {
+    background-color: #EF3F45;
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px; 
+    margin: 4px 2px;
+    cursor: pointer; 
+    border-radius: 5px; 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+button:hover {
+    background-color: #F00D00;
+    transform: scale(1.05); 
+}
+
+button:focus {
+    outline: none; 
+}
+
+.links-retorno {
+    margin-top: 70px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.links-retorno > a {
+    background-color: #FFA500;
+    color: white; /* Cor do texto */
+    border: none; /* Remove a borda padrão */
+    padding: 10px 20px; /* Adiciona espaçamento interno */
+    text-align: center; /* Centraliza o texto */
+    text-decoration: none; /* Remove sublinhado */
+    display: inline-block; /* Faz o link ficar na mesma linha que outros elementos */
+    font-size: 16px; /* Tamanho da fonte */
+    margin: 4px 2px; /* Adiciona espaçamento entre os botões */
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
+    border-radius: 5px; /* Cantos arredondados */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Animações ao passar o mouse */
+    max-width: 200px; /* Largura máxima do botão */
+    width: 100%; /* Para que o botão preencha até o max-width */
+    box-sizing: border-box; /* Para incluir padding e borda na largura total */
+}
+
+.links-retorno > a:hover {
+    background-color: #FF8C00;
+    transform: scale(1.05); /* Levemente aumenta o tamanho do link */
+}

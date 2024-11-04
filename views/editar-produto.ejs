@@ -1,0 +1,26 @@
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/<%= style %>">
+</head>
+
+<h1>Editar Produto</h1>
+
+<form action="/editar-produto/<%= product.id %>" method="POST">
+    <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" value="<%= product.nome %>" required>
+
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" name="quantidade" value="<%= product.quantidade %>" required>
+
+        <label for="preco">Preço:</label>
+        <input type="text" name="preco" value="<%= product.preco %>" required>
+
+        <label for="ncmsh">Código:</label>
+        <input type="text" name="ncmsh" value="<%= product.ncmsh %>" required>
+
+        <button type="submit">Salvar</button>
+        <a class="btn" href="/estoque">Voltar</a>
+    </div>
+</form>
+

@@ -1,0 +1,80 @@
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.telas {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.telas > div {
+    width: 200px;
+    height: 200px;
+    background-color: #727278;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.telas > div:hover {
+    transform: scale(1.1);
+    background-color: #95D1ED;
+}
+
+.div-1 {
+    grid-area: 1 / 1 / 3 / 3;
+}
+
+.div-2 {
+    grid-area: 4 / 1 / 6 / 3;
+}
+
+.div-3 {
+    grid-area: 1 / 4 / 3 / 6;
+}
+
+.div-4 {
+    grid-area: 4 / 4 / 6 / 6;
+}
+
+.telas > div > a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: normal;
+}
+
+.deslogar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.deslogar > div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    width: 500px;
+    height: 200px;
+}
+
+.deslogar > div > a {
+    text-decoration: underline;
+    color: #3498db; 
+    font-weight: bold;
+}

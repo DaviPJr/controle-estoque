@@ -1,0 +1,126 @@
+<h2>Relatórios de Estoque </h2>
+
+<div class="container">
+    <form id="relatorioForm" action="/relatorios" method="POST">
+        <label for="startDate">De:</label>
+        <input type="date" name="startDate" required>
+        
+        <label for="endDate">Até:</label>
+        <input type="date" name="endDate" required>
+        
+        <button type="submit">Filtrar</button>
+        <button type="button" id="exportPdfButton">Exportar para PDF</button>
+    </form>
+    
+    <h3>Entradas</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome do Produto</th>
+                <th>Quantidade</th>
+                <th>Valor de entrada</th>
+                <th>Código</th>
+                <th>Data da Entrada</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% entries.forEach(entry => { %>
+                <tr>
+                    <td><%= entry.nome %></td>
+                    <td><%= entry.quantidade %></td>
+                    <td><%= entry.preco %></td>
+                    <td><%= entry.ncmsh %></td>
+                    <td><%= entry.data_entrada.toISOString().split('T')[0] %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    
+    <h3>Saídas</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome do Produto</th>
+                <th>Quantidade</th>
+                <th>Nome do Cliente</th>
+                <th>Valor da venda:</th>
+                <th>Data da Saída</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% exits.forEach(exit => { %>
+                <tr>
+                    <td><%= exit.nome_produto %></td>
+                    <td><%= exit.quantidade %></td>
+                    <td><%= exit.nome_cliente %></td>
+                    <td>R$ <%= exit.valor %></td>
+                    <td><%= exit.data_saida.toISOString().split('T')[0] %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    
+    <h3>Produtos em Falta</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome do Produto</th>
+                <th>Código</th>
+                <th>Quantidade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% outOfStock.forEach(product => { %>
+                <tr>
+                    <td><%= product.nome %></td>
+                    <td><%= product.ncmsh %></td>
+                    <td><%= product.quantidade %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <a href="/home">Voltar</a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    document.getElementById('exportPdfButton').addEventListener('click', function() {
+        const form = document.getElementById('relatorioForm');
+        const startDate = form.startDate.value;
+        const endDate = form.endDate.value;
+
+        if (!startDate || !endDate) {
+            alert("Por favor, preencha as datas.");
+            return;
+        }
+
+        const actionUrl = "/exportar-relatorios-pdf"; 
+
+        const data = {
+            startDate: startDate,
+            endDate: endDate
+        };
+
+        axios.post(actionUrl, data, {
+            responseType: 'blob' 
+        })
+        .then(response => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'relatorios.pdf'; 
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        })
+        .catch(error => {
+            console.error(error);
+            alert("Erro ao exportar o PDF.");
+        });
+    });
+</script>
+
+
+
